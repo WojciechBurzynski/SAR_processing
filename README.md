@@ -3,17 +3,17 @@ SAR data processing pipeline intended to deliver SAR data clustering.
 
 SOTA assesment of field suggest usage of supervised/self-supervised learning hybrid architectures (CNN with transformers) coupled with optical data fusion and some physics derived decision making.
 
-This repository on the other hand attempts to deliver unsupervidsed clustering capability based on different models (KMeans, GMM, GMM + texture) with physics based constraints.
+This repository on the other hand attempts to deliver unsupervidsed clustering capability based on different models (KMeans, GMM, GMM + texture) with physics based constraints and uses SAR data only (VV and VH).
 This is by no means finalized nor optimal pipeline - just the first draft approach to the topic.  
 
 # Inputs
 Sentinel-1 SAR VV and VH data as tiff files downloaded from Copernicus Browser https://browser.dataspace.copernicus.eu/ 
 
 Filtered by: 
-Image format: TIFF 32-bit
-Image resolution: high
-Coordinate system: UTM
-Layers: Raw VV and VH
+1. Image format: TIFF 32-bit
+2. Image resolution: high
+3. Coordinate system: UTM
+4. Layers: Raw VV and VH
 
 # Environment setup
 
@@ -45,11 +45,11 @@ Steps that script does:
 - mapping of clusters to appriopriate classes is performed (based on signal nature: water darkest, etc.)
 - clustered data with assigned labels is saved as plot to file - kmeans_result.png
 6. Clustering: Approach 2: GMM:
-- the same steps is performed for GMM method using following inuput features - vv_filtered, vh_filtered, ratio
+- the same steps are performed for GMM method using following inuput features - vv_filtered, vh_filtered, ratio
 7. Clustering: Approach 3: GMM + texture features:
 - GMM method is extended by usage of texture features vv_tex and vh_tex so feature set is as following -  vv_filtered, vh_filtered, ratio, vv_tex, vh_tex
 8. Clustering: Approach 4: physics based thresholds
 - Thresholds are set for each image point based on heuristic thresholds
 - Could/should be improved by thresholds set with use of statistical data analysis of provided tiffs. 
-9. Combine physics based and other methods - in order to obtain best results approach for hybrid clustering is made by relying on heuristics first and ml methods later for refinement. Such outputs are generated for each of the Approaches. 
+9. Combine physics based and other methods - in order to obtain best results approach for hybrid clustering is made by relying on heuristics first and ml methods later for refinement. Such outputs are generated for each of the approaches. 
 10.  Overlay on OSM for easier assesment of results - html files generation for OSM overlay of clustered data. 
